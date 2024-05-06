@@ -77,24 +77,310 @@
 # Use `Model.destroy_all` code.
 # TODO!
 
+Studio.destroy_all
+Movie.destroy_all 
+Actor.destroy_all 
+Role.destroy_all 
+
 # Generate models and tables, according to the domain model.
 # TODO!
+#I did this in the terminal because it wouldn't work here, but the code is:
+#rails generate model Studio, e.g.
+#then migrate with rails db:migrate
+
 
 # Insert data into the database that reflects the sample data shown above.
 # Do not use hard-coded foreign key IDs.
-# TODO!
+#add this with creating new models and adding like normal
+
+#studios
+wb = Studio.new
+
+wb["name"] = "Warner Bros."
+
+wb.save
+
+#movies
+bb = Movie.new
+
+bb["title"] = "Batman Begins"
+bb["year"] = 2005
+bb["rated"] = "PG-13"
+
+wbs = Studio.find_by({"name" => "Warner Bros."})
+
+bb["studio_id"] = wbs["id"]
+
+bb.save
+
+dk = Movie.new
+
+dk.title = "The Dark Knight"
+dk.year = 2008
+dk.rated = "PG-13"
+dk.studio_id = wbs["id"]
+
+dk.save
+
+dkr = Movie.new
+
+dkr.title = "The Dark Knight Rises"
+dkr.year = 2012
+dkr.rated = "PG-13"
+dkr.studio_id = wbs["id"]
+
+dkr.save
+
+#actors
+cb = Actor.new
+
+cb.name = "Christian Bale"
+
+cb.save
+
+mc = Actor.new
+
+mc.name = "Michael Caine"
+
+mc.save
+
+ln = Actor.new
+
+ln.name = "Liam Neeson"
+
+ln.save
+
+kh = Actor.new
+
+kh.name = "Katie Holmes"
+
+kh.save
+
+go = Actor.new
+
+go.name = "Gary Oldman"
+
+go.save
+
+hl = Actor.new
+
+hl.name = "Heath Ledger"
+
+hl.save
+
+ae = Actor.new
+
+ae.name = "Aaron Eckhart"
+
+ae.save
+
+th = Actor.new
+
+th.name = "Tom Hardy"
+
+th.save
+
+ah = Actor.new
+
+ah.name = "Anne Hathaway"
+
+ah.save
+
+#roles
+#all the bruce wayne ones
+bw = Role.new
+
+bb = Movie.find_by({"title" => "Batman Begins"})
+
+bw.movie_id = bb["id"]
+
+cb = Actor.find_by({"name" => "Christian Bale"})
+
+bw.actor_id = cb["id"]
+bw.character = "Bruce Wayne"
+
+bw.save
+
+bw2 = Role.new
+
+tdk = Movie.find_by({"title" => "The Dark Knight"})
+
+bw2.movie_id = tdk["id"]
+bw2.actor_id = cb["id"]
+bw2.character = "Bruce Wayne"
+
+bw2.save
+
+bw3 = Role.new
+
+tdkr = Movie.find_by({"title" => "The Dark Knight Rises"})
+
+bw3.movie_id = tdkr["id"]
+bw3.actor_id = cb["id"]
+bw3.character = "Bruce Wayne"
+
+bw3.save
+
+#all the Alfreds
+
+ap = Role.new
+
+mc = Actor.find_by({"name" => "Michael Caine"})
+
+ap.movie_id = bb["id"]
+ap.actor_id = mc["id"]
+ap.character = "Alfred"
+
+ap.save
+
+ap2 = Role.new
+
+ap2.movie_id = tdk["id"]
+ap2.actor_id = mc["id"]
+ap2.character = "Alfred"
+
+ap2.save
+
+ap3 = Role.new 
+
+ap3.movie_id = tdkr["id"]
+ap3.actor_id = mc["id"]
+ap3.character = "Alfred"
+
+ap3.save
+
+#Liam
+
+rg = Role.new
+
+ln = Actor.find_by({"name" => "Liam Neeson"})
+
+rg.movie_id = bb["id"]
+rg.actor_id = ln["id"]
+rg.character = "Ras al Gul"
+
+rg.save
+
+#both Rachels
+
+rd = Role.new
+
+kh = Actor.find_by({"name" => "Katie Holmes"})
+
+rd.movie_id = bb["id"]
+rd.actor_id = kh["id"]
+rd.character = "Rachel Dawes"
+
+rd.save
+
+rd2 = Role.new
+
+rd2.movie_id = tdk["id"]
+rd2.actor_id = kh.id
+rd2.character = "Rachel Dawes"
+
+rd2.save
+
+#all the gordons
+
+cg = Role.new
+
+ga = Actor.find_by({"name" => "Gary Oldman"})
+
+cg.movie_id = bb.id
+cg.actor_id = ga.id
+cg.character = "Comm Gordon"
+
+cg.save
+
+cg2 = Role.new
+
+cg2.movie_id = tdk.id
+cg2.actor_id = ga.id
+cg2.character = "Comm Gordon"
+
+cg2.save
+
+cg3 = Role.new
+
+cg3.movie_id = tdkr.id
+cg3.actor_id = ga.id
+cg3.character = "Comm Gordon"
+
+cg3.save
+
+#joker
+
+jk = Role.new
+
+hl = Actor.find_by({"name" => "Heath Ledger"})
+
+jk.movie_id = bb.id
+jk.actor_id = hl.id
+jk.character = "Joker"
+
+jk.save
+
+#harvey
+hd = Role.new
+
+ae = Actor.find_by({"name" => "Aaron Eckhart"})
+
+hd.movie_id = tdk.id
+hd.actor_id = ae.id
+hd.character = "Harvey Dent"
+
+hd.save
+
+#bane
+
+bn = Role.new
+
+th = Actor.find_by({"name" => "Tom Hardy"})
+
+bn.movie_id = tdkr.id
+bn.actor_id = th.id
+bn.character = "Bane"
+
+bn.save
+
+#catwoman
+
+cw = Role.new
+
+ah = Actor.find_by({"name" => "Anne Hathaway"})
+
+cw.movie_id = tdkr.id
+cw.actor_id = ah.id
+cw.character = "Cat Woman"
+
+cw.save
 
 # Prints a header for the movies output
+movies = Movie.all
+
 puts "Movies"
 puts "======"
+for title in movies
+puts "#{title.title}"
+end
 puts ""
 
 # Query the movies data and loop through the results to display the movies output.
 # TODO!
 
 # Prints a header for the cast output
+actors = Actor.all
+casts = Role.all
+movies = Movie.all
+
 puts ""
 puts "Top Cast"
+for 
+
+
+end
+
 puts "========"
 puts ""
 
