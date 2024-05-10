@@ -367,6 +367,7 @@ end
 puts ""
 
 # Query the movies data and loop through the results to display the movies output.
+# For each movie, loop through the results to display the movies output.
 # TODO!
 
 # Prints a header for the cast output
@@ -374,15 +375,29 @@ actors = Actor.all
 casts = Role.all
 movies = Movie.all
 
+
 puts ""
 puts "Top Cast"
-for 
-
-
-end
-
 puts "========"
+for movie in movies
+    puts movie.title
+    roles_by_movie = casts.where({"movie_id" => movie.id})
+    for cast in roles_by_movie
+        actor = Actor.find_by({"id" => cast.actor_id})
+        cast = cast.character
+        puts cast + " : " + actor.name
+    end
+end
 puts ""
 
+
+movie = Movie.find_by({"title" => "Batman Begins"})
+puts movie.title
+movie1id = movie.id
+roles = Role.where({"movie_id" => movie1id})
+for cast in roles
+    actor = Actor.find_by({"id" => cast.actor_id})
+    puts cast.character
+end
 # Query the cast data and loop through the results to display the cast output for each movie.
 # TODO!
